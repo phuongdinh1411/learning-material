@@ -9,9 +9,15 @@
 
 1. Read the concept of TCP in [this wiki page](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) and try to understand all the concepts of it (deeply):
     - How TCP open a connection? what does it need to open a connection?
-        + Why there are 3 way handshakes but not 2 way? 
+        + Why there are 3 way handshakes but not 2 way?
+            Handshakes is process to exchange sequence number. And actuality though, the middle two events (#2 and #3) happen in the same packet. What makes a packet a SYN or ACK is simply a binary flag turned on or off inside each TCP header, so there is nothing preventing both of these flags from being enabled on the same packet. So the three-way handshake ends up being:
+            Alice ---> Bob    SYNchronize with my Initial Sequence Number of X
+            Alice <--- Bob    I received your syn, I ACKnowledge that I am ready for [X+1]
+            Alice <--- Bob    SYNchronize with my Initial Sequence Number of Y
+            Alice ---> Bob    I received your syn, I ACKnowledge that I am ready for [Y+1]
         + What is syn, ack mean?
         + Why they have to send 2 "random" sequence numbers? The purpose of this sequence number?
+            The use of sequence and acknowledgment numbers allows both sides to detect missing or out-of-order segments
         + What if the 3rd handshake fail? How the server can detect it and what does it do in this case?
     - How TCP handles the connection?
         + What happens if some bits are wrong due to connection errors? How to detect them and fix them?
@@ -19,19 +25,29 @@
         + What will happen if some "packet" is missing on the way?
         + How to detect the appropriate number of packets to send (speed of sending packet)?
     - How TCP close the connection?
+        The connection termination phase uses a four-way handshake, with each side of the connection terminating independently. 
+        It is also possible to terminate the connection by a 3-way handshake, when host A sends a FIN and host B replies with a FIN & ACK (combining two steps into one) and host A replies with an ACK
         + What if the internet is dropped in the middle of the connection? Or in case one peer is crash?
     - How long you can keep a TCP connection alive?
 
 2. What are the differences between TCP and UDP? And in which case we use which?
 
-3. How Ping command works? What is TTL?? How does TTL will be changed?? 
+3. How Ping command works? What is TTL?? How does TTL will be changed??
+    Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
 
 4. How HTTP works?
+    How does HTTP work? As a request-response protocol, HTTP gives users a way to interact with web resources such as HTML files by transmitting hypertext messages between clients and servers. HTTP clients generally use Transmission Control Protocol (TCP) connections to communicate with servers.
+
     - Why did people say that HTTP is stateless? The reason they make it stateless?
+    The HTTP protocol is a stateless one. This means that every HTTP request the server receives is independent and does not relate to requests that came prior to it. For example, imagine the following scenario: a request is made for the first ten user records, then another request is made for the next ten records.
+
+
     - Can we make a persistent HTTP connection? pros and cons of this way?
     - Why HTTP require cookie each time we send the request?
     - Can someone use your cookie and log in your Facebook account? How to migrate this?
     - What is HTTP session? How does authentication work in HTTP? What is JWT?
+        HTTP sessions is an industry standard feature that allows Web servers to maintain user identity and to store user-specific data during multiple request/response interactions between a client application and a Web application.
+
     - Which type of "data" HTTP can help us to get or push? (binary file? image? text file? video file? music file?)
     - REST/RESTful?
     - AJAX technique? 
@@ -41,6 +57,7 @@
 5. When you type "google.com" into your browser, that will happen when you type enter till everything is displayed on your screen?
     - DNS lookup (in case you already access google.com before and also in case you do not know the IP of google.com)
         + Which protocol DNS use and why?
+            DNS queries consist of a single UDP request from the client followed by a single UDP reply from the server
         + The other of place to look up DNS.
     - TCP or UDP will be used in this case? why?
     - How to know "google.com" require HTTP or https? how browser can know and redirect from HTTP to HTTps?
@@ -59,6 +76,7 @@
     - When you open multiple tabs on your chrome, how OS knows which packet (both sending and receiving) correspond to which tab? (how about in case you open many tabs to the same page "for eg: google.com")
     - What are the maximum numbers of connection your machine can connect to "google.com" (if you have unlimited resource)
     - Can two processes listen to the same port on your machine? Why? How?
+        yes, with different protocol
     - What is `buffer`? why we always need buffer when working with "file"?
     - What is `unix socket`? When to use it?
 
@@ -79,20 +97,40 @@
 
 1. What is `process`, `thread`? What are the differents between them?
     - What data `process`, `thread` need to live? Why they said that `Thread is a lightweight process`?
+        A process has a virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, often called the primary thread, but can create additional threads from any of its threads.
+
+        A thread is an entity within a process that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process. Threads can also have their own security context, which can be used for impersonating clients.
+
+        Some people call threads lightweight processes because they have their own stack but can access shared data. Since threads share the same address space as the process and other threads within the process, it is easy to communicate between the threads.
+
     - How CPU switch (context switch) between `processes`/threads`? How data is to ensure safety? (in case single CPU core and multiple CPU cores)
+        Process-related information is stored in something called PCB(Process control block). Generally, process id, process number, process state, program counter, registers, and opened files are stored in PCB. This PCB is stored in a protected memory area to avoid normal user access as it contains critical information.
+
+        First, thes context switching needs to save the state of process P1 in the form of the program counter and the registers to the PCB (Program Counter Block), which is in the running state.
+        Now update PCB1 to process P1 and moves the process to the appropriate queue, such as the ready queue, I/O queue and waiting queue.
+        After that, another process gets into the running state, or we can select a new process from the ready state, which is to be executed, or the process has a high priority to execute its task.
+        Now, we have to update the PCB (Process Control Block) for the selected process P2. It includes switching the process state from ready to running state or from another state like blocked, exit, or suspend.
+        If the CPU already executes process P2, we need to get the status of process P2 to resume its execution at the same time point where the system interrupt occurs.
+
     - What is `multi-process` and `multi-thread`? When we should you which one?
         + Process has how many states? How does it change between each state?
         + Scheduling algorithm.
         + What will happen if a process is `waiting`? Or a thread is `sleeping`?
         + How CPU detects that a thread is `sleeping`? Or detect when it wants to run?
     - What is `thread-pool`? How to use it? Describe how to create a `thread-pool` in your programming language
+        A thread pool is a group of pre-instantiated, idle threads which stand ready to be given work
+
+    - Virtual memory ?
+
     - Can 2 different processes access or change data of each other `address space`? (this question may make you confuse with your knowledge about `virtual memory`)
         + Can 2 processes use the same library (for eg: libc is required to every process)? How?
         + How does `debugger` work? How it can attach to a running process and change data of that process? (so cool, right?)
     - How 2 processes can communicate with each other? (There are a lot of ways but focus on the OS's way)
+        There are two modes through which processes can communicate with each other – shared memory and message passing. As the name suggests, the shared memory region shares a shared memory between the processes. On the other hand, the message passing lets processes exchange information through messages
+
     - What is `child-process`? How to create a `child-process`?
         + What data a `child-process` have when we create it?
-        + Can it read/write data on it's `parent process`?
+        + Can it read/write data on it's `parent process`? No, each process has its own memory space
         + What is `copy on write (COW)`? **(this concept is important to understand OS)** // if you love computer security like me you can read more about `Dirty COW`, it's fabulous
         + What will happen when `child-process` changes a variable of `parent process`?
         + If `file descriptor` also be `inherited` by the `child process`. What if 2 processes can handle a same `file descriptor` or even a same `socket`? can refer [here](https://www.cs.ait.ac.th/~on/O/oreilly/perl/cookbook/ch17_10.htm)
@@ -113,7 +151,8 @@
     - What will happen you call another function (with parameters) or return from a function? 
         + What will happen with stack? (why we do not use heap here?)? 
         + What will happen with registors?
-    - What causes stack-over-flow?
+    - What causes stack-over-flow? Recursion and Large local variables
+ 
     - What is dynamic allocating? How does it work? 
         + How does deallocation work?
         + What happens when your computer is full of memory?
@@ -137,6 +176,8 @@
     - What is in-memory cache? (memcached/redis)
     - LRU? implement LRU in your program language! (How about multi-thread?)
     - How to migrate `Cache stampede`?
+        use promise,
+        probability
     - Quicksort(O(n^2) in worst case) vs Merge sort (O(nlogn) in worst case). Which is faster? Why? How they use these 2 sorting algorithms in real life?
 
 - Good resources:
@@ -158,17 +199,38 @@
 
 3. How `indexing` works internally?
     - What algorithm and data structure `indexing` used? And why?
+        b-tree, hash table, r-tree, bitmap
     - How `composite indexing` works?
     - How to know your query is using index?
+     Write "explain " in front of your query. The result will tell you which indexes might be used
+
+     How does a database know when to use an index? When a query like “SELECT * FROM Employee WHERE Employee_Name = ‘Abc’ ” is run, the database will check to see if there is an index on the column(s) being queried. Assuming the Employee_Name column does have an index created on it, the database will have to decide whether it actually makes sense to use the index to find the values being searched – because there are some scenarios where it is actually less efficient to use the database index, and more efficient just to scan the entire table.
+
     - How index work in this case: `WHERE age = 5` and `Where age > 5`? The complexity to go to the next record?
     - Indexing with char?
 
 4. The complexity of SQL query? How to measure it? How SQL optimize a query?
     - Compare `WHERE id = 'a' AND id = 'b' AND id = 'c'` vs `WHERE id in (a, b, c)`?
     - Complexity of this query `SELECT * FROM abc ORDER BY name LIMIT 10 OFFSET 1000000` // SELECT 10 record from offset 10^6 after sort by name (which is a char)? How to optimize it?
+        BigO(1000000)
+        faster: select * from big_table WHERE id < 10 ORDER BY id DESC LIMIT 1;
+
     - What is the complexity of `COUNT(*)` query?
     - How to write query to avoid full table scan?
     - Complexity of `JOIN`, `INNER JOIN`, `OUTTER JOIN`?
+        A nested join is a join that compares every record in one table against every record in the other. The complexity is O(MN).
+
+        This join is efficient when one or both of the tables are extremely small (e.g. < 10 records), which is a very common situation when evaluating queries because some subqueries are written to return only one row.
+        Joins that are not equi-joins* frequently have to do a nested join to evaluate all possible pairs of records, and frequently have result sets of size O(MN) anyway, so then this complexity isn't even bad.
+        Cross-joins are explicitly asking to take every pair of records, and therefore would use this algorithm.
+        A hash join has expected complexity O(M + N), but has unfavorable memory access patterns (random disk access is really bad). It can be really good when one or both the tables is small enough to fit into memory.
+
+        Merge joins are based on having both tables be sorted according to the keys being joined on, and then doing a O(M+N) merge-like step to determine the matching records.
+
+        If both tables have an index on the joined columns, then the index already maintains those columns in order and there's no need to sort. The complexity will be O(M + N).
+        If neither table has an index on the joined columns, a sort of both tables will need to happen first, so the complexity will look more like O(M log M + N log N). If the tables are large enough that they don't fit into memory, at least the data access patterns on the disk will be favorable to paging.
+        If only one of the tables has an index on the joined columns, only the one table that doesn't have the index will need to be sorted before the merge step can happen, so the complexity will look like O(M + N log N).
+        The term "index join" is confusing. Oracle uses this term to refer to a procedure of doing a hash join over indexes to optimize some queries that don't have joins in them at all! However, I think the more typical usage is another join algorithm that is often used by database engines. If one of the tables is fairly small, but the other is large and already has an index on the join columns, then each entry in the small table may be looked up (via an index seek) in the large table. This requires O(M * log N) time if N is the size of the large table. This join can be advantageous because N appears in the complexity only with a log factor in front of it.
 
 5. What is Database Replicating? When we need it?
     - What is `bin log`? How `Master DB` sync with `Slave DB`?
