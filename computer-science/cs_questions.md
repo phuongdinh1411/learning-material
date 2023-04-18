@@ -31,9 +31,47 @@
     - How long you can keep a TCP connection alive?
 
 2. What are the differences between TCP and UDP? And in which case we use which?
+    https://www.geeksforgeeks.org/differences-between-tcp-and-udp/
+    Features of TCP
+        TCP keeps track of the segments being transmitted or received by assigning numbers to every single one of them.
+        Flow control limits the rate at which a sender transfers data. This is done to ensure reliable delivery.
+        TCP implements an error control mechanism for reliable data transfer.
+        TCP takes into account the level of congestion in the network.
+    Advantages of TCP
+        It is reliable for maintaining a connection between Sender and Receiver.
+        It is responsible for sending data in a particular sequence.
+        Its operations are not dependent on OS.
+        It allows and supports many routing protocols.
+        It can reduce the speed of data based on the speed of the receiver.
+    Disadvantages of TCP
+        It is slower than UDP and it takes more bandwidth.
+        Slower upon starting of transfer of a file.
+        Not suitable for LAN and PAN Networks.
+        It does not have a multicast or broadcast category.
+        It does not load the whole page if a single data of the page is missing.
+
+    Features of UDP
+        Used for simple request-response communication when the size of data is less and hence there is lesser concern about flow and error control.
+        It is a suitable protocol for multicasting as UDP supports packet switching.
+        UDP is used for some routing update protocols like RIP(Routing Information Protocol).
+        Normally used for real-time applications which can not tolerate uneven delays between sections of a received message.
+    Advantages of UDP
+        It does not require any connection for sending or receiving data.
+        Broadcast and Multicast are available in UDP.
+        UDP can operate on a large range of networks.
+        UDP has live and real-time data.
+        UDP can deliver data if all the components of the data are not complete.
+    Disadvantages of UDP
+        We can not have any way to acknowledge the successful transfer of data.
+        UDP cannot have the mechanism to track the sequence of data.
+        UDP is connectionless, and due to this, it is unreliable to transfer data.
+        In case of a Collision, UDP packets are dropped by Routers in comparison to TCP.
+        UDP can drop packets in case of detection of errors.
 
 3. How Ping command works? What is TTL?? How does TTL will be changed??
     Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
+
+    This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
 
 4. How HTTP works?
     How does HTTP work? As a request-response protocol, HTTP gives users a way to interact with web resources such as HTML files by transmitting hypertext messages between clients and servers. HTTP clients generally use Transmission Control Protocol (TCP) connections to communicate with servers.
@@ -43,6 +81,9 @@
 
 
     - Can we make a persistent HTTP connection? pros and cons of this way?
+        If the client does not close the connection when all of the data it needs has been received, the resources needed to keep the connection open on the server will be unavailable for other clients. How much this affects the server's availability and how long the resources are unavailable depend on the server's architecture and configuration.
+
+
     - Why HTTP require cookie each time we send the request?
     - Can someone use your cookie and log in your Facebook account? How to migrate this?
     - What is HTTP session? How does authentication work in HTTP? What is JWT?
@@ -50,7 +91,7 @@
 
     - Which type of "data" HTTP can help us to get or push? (binary file? image? text file? video file? music file?)
     - REST/RESTful?
-    - AJAX technique? 
+    - AJAX technique?
     - How HTTPs work?
     - Learn about some useful headers.
 
@@ -113,6 +154,7 @@
         If the CPU already executes process P2, we need to get the status of process P2 to resume its execution at the same time point where the system interrupt occurs.
 
     - What is `multi-process` and `multi-thread`? When we should you which one?
+        https://www.geeksforgeeks.org/difference-between-multiprocessing-and-multithreading/
         + Process has how many states? How does it change between each state?
         + Scheduling algorithm.
         + What will happen if a process is `waiting`? Or a thread is `sleeping`?
@@ -146,11 +188,18 @@
         + How large `virtual memory` is?
         + What is `paging`?
         + Can 2 processes map to the same `physical address`? How and in which case?
+            Usually, each process gets its own page table, so any address it uses is mapped to a unique frame in physical memory. But what if the operating system points two page table-entries to the same frame? This means that this frame will be shared; and any changes that one process makes will be visible to the other.
+
+            You can see now how threads are implemented. In Section 4.3.1, clone we said that the Linux clone() function could share as much or as little of a new process with the old process as it required. If a process calls clone() to create a new process, but requests that the two processes share the same page table, then you effectively have a thread as both processes see the same underlying physical memory.
+
+            You can also see now how copy on write is done. If you set the permissions of a page to be read-only, when a process tries to write to the page the operating system will be notified. If it knows that this page is a copy-on-write page, then it needs to make a new copy of the page in system memory and point the page in the page table to this new page. This can then have its attributes updated to have write permissions and the process has its own unique copy of the page.
+    
     - What is `heap space` and `stack space`?
     - What will happen with memory when you open an application?
     - What will happen you call another function (with parameters) or return from a function? 
         + What will happen with stack? (why we do not use heap here?)? 
         + What will happen with registors?
+    
     - What causes stack-over-flow? Recursion and Large local variables
  
     - What is dynamic allocating? How does it work? 
@@ -172,13 +221,13 @@
     - What happens with CPU when we execute a `syscal`?
     - What is `user space` and `kernel space`?
 
+
 6. Caching:
     - What is in-memory cache? (memcached/redis)
     - LRU? implement LRU in your program language! (How about multi-thread?)
     - How to migrate `Cache stampede`?
-        use promise,
-        probability
-    - Quicksort(O(n^2) in worst case) vs Merge sort (O(nlogn) in worst case). Which is faster? Why? How they use these 2 sorting algorithms in real life?
+        https://viblo.asia/p/cache-stampede-cau-chuyen-dan-tho-AZoJjYwO4Y7
+
 
 - Good resources:
     * [Overview of OS syntax, try do dive deeper to each concept](https://medium.com/cracking-the-data-science-interview/the-10-operating-system-concepts-software-developers-need-to-remember-480d0734d710)
@@ -210,7 +259,6 @@
     - Indexing with char?
 
 4. The complexity of SQL query? How to measure it? How SQL optimize a query?
-    - Compare `WHERE id = 'a' AND id = 'b' AND id = 'c'` vs `WHERE id in (a, b, c)`?
     - Complexity of this query `SELECT * FROM abc ORDER BY name LIMIT 10 OFFSET 1000000` // SELECT 10 record from offset 10^6 after sort by name (which is a char)? How to optimize it?
         BigO(1000000)
         faster: select * from big_table WHERE id < 10 ORDER BY id DESC LIMIT 1;
@@ -219,18 +267,17 @@
     - How to write query to avoid full table scan?
     - Complexity of `JOIN`, `INNER JOIN`, `OUTTER JOIN`?
         A nested join is a join that compares every record in one table against every record in the other. The complexity is O(MN).
+            This join is efficient when one or both of the tables are extremely small (e.g. < 10 records), which is a very common situation when evaluating queries because some subqueries are written to return only one row.
+            Joins that are not equi-joins* frequently have to do a nested join to evaluate all possible pairs of records, and frequently have result sets of size O(MN) anyway, so then this complexity isn't even bad.
+            Cross-joins are explicitly asking to take every pair of records, and therefore would use this algorithm.
 
-        This join is efficient when one or both of the tables are extremely small (e.g. < 10 records), which is a very common situation when evaluating queries because some subqueries are written to return only one row.
-        Joins that are not equi-joins* frequently have to do a nested join to evaluate all possible pairs of records, and frequently have result sets of size O(MN) anyway, so then this complexity isn't even bad.
-        Cross-joins are explicitly asking to take every pair of records, and therefore would use this algorithm.
         A hash join has expected complexity O(M + N), but has unfavorable memory access patterns (random disk access is really bad). It can be really good when one or both the tables is small enough to fit into memory.
 
         Merge joins are based on having both tables be sorted according to the keys being joined on, and then doing a O(M+N) merge-like step to determine the matching records.
-
-        If both tables have an index on the joined columns, then the index already maintains those columns in order and there's no need to sort. The complexity will be O(M + N).
-        If neither table has an index on the joined columns, a sort of both tables will need to happen first, so the complexity will look more like O(M log M + N log N). If the tables are large enough that they don't fit into memory, at least the data access patterns on the disk will be favorable to paging.
-        If only one of the tables has an index on the joined columns, only the one table that doesn't have the index will need to be sorted before the merge step can happen, so the complexity will look like O(M + N log N).
-        The term "index join" is confusing. Oracle uses this term to refer to a procedure of doing a hash join over indexes to optimize some queries that don't have joins in them at all! However, I think the more typical usage is another join algorithm that is often used by database engines. If one of the tables is fairly small, but the other is large and already has an index on the join columns, then each entry in the small table may be looked up (via an index seek) in the large table. This requires O(M * log N) time if N is the size of the large table. This join can be advantageous because N appears in the complexity only with a log factor in front of it.
+            If both tables have an index on the joined columns, then the index already maintains those columns in order and there's no need to sort. The complexity will be O(M + N).
+            If neither table has an index on the joined columns, a sort of both tables will need to happen first, so the complexity will look more like O(M log M + N log N). If the tables are large enough that they don't fit into memory, at least the data access patterns on the disk will be favorable to paging.
+            If only one of the tables has an index on the joined columns, only the one table that doesn't have the index will need to be sorted before the merge step can happen, so the complexity will look like O(M + N log N).
+            The term "index join" is confusing. Oracle uses this term to refer to a procedure of doing a hash join over indexes to optimize some queries that don't have joins in them at all! However, I think the more typical usage is another join algorithm that is often used by database engines. If one of the tables is fairly small, but the other is large and already has an index on the join columns, then each entry in the small table may be looked up (via an index seek) in the large table. This requires O(M * log N) time if N is the size of the large table. This join can be advantageous because N appears in the complexity only with a log factor in front of it.
 
 5. What is Database Replicating? When we need it?
     - What is `bin log`? How `Master DB` sync with `Slave DB`?
