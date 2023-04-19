@@ -32,49 +32,49 @@
 
 2. What are the differences between TCP and UDP? And in which case we use which?
     https://www.geeksforgeeks.org/differences-between-tcp-and-udp/
-    Features of TCP
-        TCP keeps track of the segments being transmitted or received by assigning numbers to every single one of them.
-        Flow control limits the rate at which a sender transfers data. This is done to ensure reliable delivery.
-        TCP implements an error control mechanism for reliable data transfer.
-        TCP takes into account the level of congestion in the network.
-    Advantages of TCP
-        It is reliable for maintaining a connection between Sender and Receiver.
-        It is responsible for sending data in a particular sequence.
-        Its operations are not dependent on OS.
-        It allows and supports many routing protocols.
-        It can reduce the speed of data based on the speed of the receiver.
-    Disadvantages of TCP
-        It is slower than UDP and it takes more bandwidth.
-        Slower upon starting of transfer of a file.
-        Not suitable for LAN and PAN Networks.
-        It does not have a multicast or broadcast category.
-        It does not load the whole page if a single data of the page is missing.
+    - Features of TCP
+        + TCP keeps track of the segments being transmitted or received by assigning numbers to every single one of them.
+        + Flow control limits the rate at which a sender transfers data. This is done to ensure reliable delivery.
+        + TCP implements an error control mechanism for reliable data transfer.
+        + TCP takes into account the level of congestion in the network.
+    - Advantages of TCP
+        + It is reliable for maintaining a connection between Sender and Receiver.
+        + It is responsible for sending data in a particular sequence.
+        + Its operations are not dependent on OS.
+        + It allows and supports many routing protocols.
+        + It can reduce the speed of data based on the speed of the receiver.
+    - Disadvantages of TCP
+        + It is slower than UDP and it takes more bandwidth.
+        + Slower upon starting of transfer of a file.
+        + Not suitable for LAN and PAN Networks.
+        + It does not have a multicast or broadcast category.
+        + It does not load the whole page if a single data of the page is missing.
 
-    Features of UDP
-        Used for simple request-response communication when the size of data is less and hence there is lesser concern about flow and error control.
-        It is a suitable protocol for multicasting as UDP supports packet switching.
-        UDP is used for some routing update protocols like RIP(Routing Information Protocol).
-        Normally used for real-time applications which can not tolerate uneven delays between sections of a received message.
-    Advantages of UDP
-        It does not require any connection for sending or receiving data.
-        Broadcast and Multicast are available in UDP.
-        UDP can operate on a large range of networks.
-        UDP has live and real-time data.
-        UDP can deliver data if all the components of the data are not complete.
-    Disadvantages of UDP
-        We can not have any way to acknowledge the successful transfer of data.
-        UDP cannot have the mechanism to track the sequence of data.
-        UDP is connectionless, and due to this, it is unreliable to transfer data.
-        In case of a Collision, UDP packets are dropped by Routers in comparison to TCP.
-        UDP can drop packets in case of detection of errors.
+    - Features of UDP
+        + Used for simple request-response communication when the size of data is less and hence there is lesser concern about flow and error control.
+        + It is a suitable protocol for multicasting as UDP supports packet switching.
+        + UDP is used for some routing update protocols like RIP(Routing Information Protocol).
+        + Normally used for real-time applications which can not tolerate uneven delays between sections of a received message.
+    - Advantages of UDP
+        + It does not require any connection for sending or receiving data.
+        + Broadcast and Multicast are available in UDP.
+        + UDP can operate on a large range of networks.
+        + UDP has live and real-time data.
+        + UDP can deliver data if all the components of the data are not complete.
+    - Disadvantages of UDP
+        + We can not have any way to acknowledge the successful transfer of data.
+        + UDP cannot have the mechanism to track the sequence of data.
+        + UDP is connectionless, and due to this, it is unreliable to transfer data.
+        + In case of a Collision, UDP packets are dropped by Routers in comparison to TCP.
+        + UDP can drop packets in case of detection of errors.
 
 3. How Ping command works? What is TTL?? How does TTL will be changed??
-    Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
+    - Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
 
-    This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
+    - This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
 
 4. How HTTP works?
-    How does HTTP work? As a request-response protocol, HTTP gives users a way to interact with web resources such as HTML files by transmitting hypertext messages between clients and servers. HTTP clients generally use Transmission Control Protocol (TCP) connections to communicate with servers.
+    - How does HTTP work? As a request-response protocol, HTTP gives users a way to interact with web resources such as HTML files by transmitting hypertext messages between clients and servers. HTTP clients generally use Transmission Control Protocol (TCP) connections to communicate with servers.
 
     - Why did people say that HTTP is stateless? The reason they make it stateless?
     The HTTP protocol is a stateless one. This means that every HTTP request the server receives is independent and does not relate to requests that came prior to it. For example, imagine the following scenario: a request is made for the first ten user records, then another request is made for the next ten records.
@@ -138,20 +138,20 @@
 
 1. What is `process`, `thread`? What are the differents between them?
     - What data `process`, `thread` need to live? Why they said that `Thread is a lightweight process`?
-        A process has a virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, often called the primary thread, but can create additional threads from any of its threads.
+        + A process has a virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, often called the primary thread, but can create additional threads from any of its threads.
 
-        A thread is an entity within a process that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process. Threads can also have their own security context, which can be used for impersonating clients.
+        + A thread is an entity within a process that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process. Threads can also have their own security context, which can be used for impersonating clients.
 
-        Some people call threads lightweight processes because they have their own stack but can access shared data. Since threads share the same address space as the process and other threads within the process, it is easy to communicate between the threads.
+        + Some people call threads lightweight processes because they have their own stack but can access shared data. Since threads share the same address space as the process and other threads within the process, it is easy to communicate between the threads.
 
     - How CPU switch (context switch) between `processes`/threads`? How data is to ensure safety? (in case single CPU core and multiple CPU cores)
-        Process-related information is stored in something called PCB(Process control block). Generally, process id, process number, process state, program counter, registers, and opened files are stored in PCB. This PCB is stored in a protected memory area to avoid normal user access as it contains critical information.
+        + Process-related information is stored in something called PCB(Process control block). Generally, process id, process number, process state, program counter, registers, and opened files are stored in PCB. This PCB is stored in a protected memory area to avoid normal user access as it contains critical information.
 
-        First, thes context switching needs to save the state of process P1 in the form of the program counter and the registers to the PCB (Program Counter Block), which is in the running state.
-        Now update PCB1 to process P1 and moves the process to the appropriate queue, such as the ready queue, I/O queue and waiting queue.
-        After that, another process gets into the running state, or we can select a new process from the ready state, which is to be executed, or the process has a high priority to execute its task.
-        Now, we have to update the PCB (Process Control Block) for the selected process P2. It includes switching the process state from ready to running state or from another state like blocked, exit, or suspend.
-        If the CPU already executes process P2, we need to get the status of process P2 to resume its execution at the same time point where the system interrupt occurs.
+        + First, thes context switching needs to save the state of process P1 in the form of the program counter and the registers to the PCB (Program Counter Block), which is in the running state.
+        + Now update PCB1 to process P1 and moves the process to the appropriate queue, such as the ready queue, I/O queue and waiting queue.
+        + After that, another process gets into the running state, or we can select a new process from the ready state, which is to be executed, or the process has a high priority to execute its task.
+        + Now, we have to update the PCB (Process Control Block) for the selected process P2. It includes switching the process state from ready to running state or from another state like blocked, exit, or suspend.
+        + If the CPU already executes process P2, we need to get the status of process P2 to resume its execution at the same time point where the system interrupt occurs.
 
     - What is `multi-process` and `multi-thread`? When we should you which one?
         https://www.geeksforgeeks.org/difference-between-multiprocessing-and-multithreading/
@@ -266,14 +266,14 @@
     - What is the complexity of `COUNT(*)` query?
     - How to write query to avoid full table scan?
     - Complexity of `JOIN`, `INNER JOIN`, `OUTTER JOIN`?
-        A nested join is a join that compares every record in one table against every record in the other. The complexity is O(MN).
+        + A nested join is a join that compares every record in one table against every record in the other. The complexity is O(MN).
             This join is efficient when one or both of the tables are extremely small (e.g. < 10 records), which is a very common situation when evaluating queries because some subqueries are written to return only one row.
             Joins that are not equi-joins* frequently have to do a nested join to evaluate all possible pairs of records, and frequently have result sets of size O(MN) anyway, so then this complexity isn't even bad.
             Cross-joins are explicitly asking to take every pair of records, and therefore would use this algorithm.
 
-        A hash join has expected complexity O(M + N), but has unfavorable memory access patterns (random disk access is really bad). It can be really good when one or both the tables is small enough to fit into memory.
+        + A hash join has expected complexity O(M + N), but has unfavorable memory access patterns (random disk access is really bad). It can be really good when one or both the tables is small enough to fit into memory.
 
-        Merge joins are based on having both tables be sorted according to the keys being joined on, and then doing a O(M+N) merge-like step to determine the matching records.
+        + Merge joins are based on having both tables be sorted according to the keys being joined on, and then doing a O(M+N) merge-like step to determine the matching records.
             If both tables have an index on the joined columns, then the index already maintains those columns in order and there's no need to sort. The complexity will be O(M + N).
             If neither table has an index on the joined columns, a sort of both tables will need to happen first, so the complexity will look more like O(M log M + N log N). If the tables are large enough that they don't fit into memory, at least the data access patterns on the disk will be favorable to paging.
             If only one of the tables has an index on the joined columns, only the one table that doesn't have the index will need to be sorted before the merge step can happen, so the complexity will look like O(M + N log N).
