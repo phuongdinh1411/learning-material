@@ -73,7 +73,7 @@
     - Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
     - This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
 
-    This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
+    - This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
 
 4. How HTTP works?
     - How does HTTP work? As a request-response protocol, HTTP gives users a way to interact with web resources such as HTML files by transmitting hypertext messages between clients and servers. HTTP clients generally use Transmission Control Protocol (TCP) connections to communicate with servers.
