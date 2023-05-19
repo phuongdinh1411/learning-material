@@ -93,6 +93,7 @@
     - REST/RESTful?
     - AJAX technique?
     - How HTTPs work?
+        - https://iorilan.medium.com/how-https-works-and-what-exactly-happened-during-a-tls-handshake-165088edbee
     - Learn about some useful headers.
 
 5. When you type "google.com" into your browser, that will happen when you type enter till everything is displayed on your screen?
@@ -227,7 +228,8 @@
     - LRU? implement LRU in your program language! (How about multi-thread?)
     - How to migrate `Cache stampede`?
         https://viblo.asia/p/cache-stampede-cau-chuyen-dan-tho-AZoJjYwO4Y7
-
+7. IO model:
+    - https://iorilan.medium.com/it-is-fast-may-not-be-a-good-answer-to-discuss-redis-during-an-interview-and-here-is-a-better-one-5bb3bc3cd37f
 
 - Good resources:
     * [Overview of OS syntax, try do dive deeper to each concept](https://medium.com/cracking-the-data-science-interview/the-10-operating-system-concepts-software-developers-need-to-remember-480d0734d710)
@@ -261,7 +263,7 @@
 4. The complexity of SQL query? How to measure it? How SQL optimize a query?
     - Complexity of this query `SELECT * FROM abc ORDER BY name LIMIT 10 OFFSET 1000000` // SELECT 10 record from offset 10^6 after sort by name (which is a char)? How to optimize it?
         BigO(1000000)
-        faster: select * from big_table WHERE id < 10 ORDER BY id DESC LIMIT 1;
+        faster: select * from big_table WHERE id < 10 ORDER BY name DESC LIMIT 1;
 
     - What is the complexity of `COUNT(*)` query?
     - How to write query to avoid full table scan?
@@ -288,6 +290,7 @@
     - How to ensure `primary key` is globally unique when sharding?
     - How we can shard a table to multiple tables (same server) and multiple DB (multiple servers)?
     - How query can work when we sharding? for example query but the data is in different tables/dbs?
+    - https://iorilan.medium.com/a-5-years-tech-lead-said-they-shard-a-database-to-scale-but-then-he-failed-to-answer-this-question-8be39115dcb0
 
 7. What is database transaction?
     - How `rollback` works internally?
@@ -295,7 +298,8 @@
     - How transaction work when there are many concurrent requests?
     - How to avoid `race condition` in DB? `Read/Write` lock?
     - `Distributed transaction`? How to make a transaction when a query needs to access multiple DB?
-
+8. why kafka is fast:
+    - https://blog.devgenius.io/what-makes-kafka-so-performant-df5dbecb7f3a
 
 ## SECURITY
 
