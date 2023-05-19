@@ -4,6 +4,7 @@
 - [OPERATING SYSTEM](#operating-system)
 - [DATABASE](#database)
 - [SECURITY](#security)
+- [DISTRIBUTED SYSTEM](#distributed-system)
 
 ## NETWORKING
 
@@ -31,7 +32,7 @@
     - How long you can keep a TCP connection alive?
 
 2. What are the differences between TCP and UDP? And in which case we use which?
-    https://www.geeksforgeeks.org/differences-between-tcp-and-udp/
+    - https://www.geeksforgeeks.org/differences-between-tcp-and-udp/
     - Features of TCP
         + TCP keeps track of the segments being transmitted or received by assigning numbers to every single one of them.
         + Flow control limits the rate at which a sender transfers data. This is done to ensure reliable delivery.
@@ -70,7 +71,6 @@
 
 3. How Ping command works? What is TTL?? How does TTL will be changed??
     - Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
-
     - This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
 
 4. How HTTP works?
@@ -79,10 +79,8 @@
     - Why did people say that HTTP is stateless? The reason they make it stateless?
     The HTTP protocol is a stateless one. This means that every HTTP request the server receives is independent and does not relate to requests that came prior to it. For example, imagine the following scenario: a request is made for the first ten user records, then another request is made for the next ten records.
 
-
     - Can we make a persistent HTTP connection? pros and cons of this way?
         If the client does not close the connection when all of the data it needs has been received, the resources needed to keep the connection open on the server will be unavailable for other clients. How much this affects the server's availability and how long the resources are unavailable depend on the server's architecture and configuration.
-
 
     - Why HTTP require cookie each time we send the request?
     - Can someone use your cookie and log in your Facebook account? How to migrate this?
@@ -187,6 +185,7 @@
 3. How does memory is managed in the OS?
     - What is `virtual memory`? Why do we need it? How does it work?
         + How large `virtual memory` is?
+        + What is `mmap` ?
         + What is `paging`?
         + Can 2 processes map to the same `physical address`? How and in which case?
             Usually, each process gets its own page table, so any address it uses is mapped to a unique frame in physical memory. But what if the operating system points two page table-entries to the same frame? This means that this frame will be shared; and any changes that one process makes will be visible to the other.
@@ -210,12 +209,14 @@
     - How does `Garbage Collection` work? When it will be triggered?
     - What is a pointer? What difference between `pass by value` and `pass by reference`?
     - Where `global variable` will be saved?
+    - what is memory management in linux ?
 
 4. Why in Linux `everything is "file"`?
     - How does mouse/keyboard/monitor..... communicate with your computer?
     - What is `file descriptor`?
     - What is `buffer`? Why do we need `buffer`?
     - What will happen if 2 processes read/write to the same file?
+    - What is file system management in linux ?
 
 5. What is `system call (syscal)`?
     - How to do a `syscal`?
@@ -320,3 +321,5 @@
 3. How to store credential information efficiency? (user password, config key, database credential, user information, secret key,.... )
 
 4. Describe a way to defense DDOS? (actually, there are many kinds of DDOS not just network or memory, so this question is pretty complicated)
+
+## DISTRIBUTED SYSTEM
