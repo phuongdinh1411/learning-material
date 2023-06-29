@@ -94,7 +94,23 @@
     - AJAX technique?
     - How HTTPs work?
         - https://iorilan.medium.com/how-https-works-and-what-exactly-happened-during-a-tls-handshake-165088edbee
+        - HTTP/1.1:
+            + HTTP pipelining: is a technique in which multiple HTTP requests are sent on a single TCP connection without waiting for the corresponding responses.
+            + HTTP pipelining is not enabled by default in modern browsers due to proxy servers, Head-of-line blocking (HOL) .
+    - What is head-of-line blocking ? 
+    - How HTTPS solves Head-of-line blocking ?
+        + https://www.varlog.co.in/blog/hol-blocking-http/
+        + https://medium.com/@ahmadfarag/http-in-depth-dfdac806c2c0
+        + https://calendar.perfplanet.com/2020/head-of-line-blocking-in-quic-and-http-3-the-details/
     - Learn about some useful headers.
+    - HTTP2 improvement vs HTTP1:
+        + HTTP/2 is a major advancement in the HTTP protocol after HTTP/1.1 providing multiple features such as Binary Framing Layer, Multiplexing, Header Compression, Server Push, etc…
+    - GRPC: https://ssudan16.medium.com/internals-of-grpc-architecture-afae7450ff5b
+        + gRPC provides four communication patterns:
+        + Unary RPC where-in the client sends a single Request to the remote server and waits for the Response from the server.
+        + Server Side Streaming RPC where-in the client sends a single Message to the server and the server returns back a sequence of Messages.
+        + Client Side Streaming RPC where-in the client sends a sequence of Messages and the server returns back a single Response.
+        + Bi directional Streaming RPC where-in both the client and server can send a sequence of Messages in either direction but the client has to initiate the Request.
 
 5. When you type "google.com" into your browser, that will happen when you type enter till everything is displayed on your screen?
     - DNS lookup (in case you already access google.com before and also in case you do not know the IP of google.com)
@@ -107,6 +123,9 @@
     - When getting `*.js` or `image` files do why use another `TCP connection` or use the same one as in the get `HTML content`? How DNS lookup work in this case?
     - After your browser display "google.com" fully, is there any connection open?
     - Caching can apply to which steps? How caching applied?
+    - DNS: 
+        + https://medium.com/tech-tajawal/journey-to-dns-part-1-96348198a2be
+        + https://www.educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers/Y5ZqGDpDLrO
 
 6. What is the connection pool? It's advantages and disadvantages? How to implement connection pool in your programing language?
 
@@ -231,6 +250,12 @@
     - LRU? implement LRU in your program language! (How about multi-thread?)
     - How to migrate `Cache stampede`?
         https://viblo.asia/p/cache-stampede-cau-chuyen-dan-tho-AZoJjYwO4Y7
+    - Caching policy:
+        + https://levelup.gitconnected.com/master-the-art-of-caching-for-system-design-interviews-a-complete-guide-676bb49d194
+        + write-through
+        + write-around
+        + write-back
+        + write-behind
 7. IO model:
     - https://iorilan.medium.com/it-is-fast-may-not-be-a-good-answer-to-discuss-redis-during-an-interview-and-here-is-a-better-one-5bb3bc3cd37f
 
@@ -303,6 +328,9 @@
     - `Distributed transaction`? How to make a transaction when a query needs to access multiple DB?
 8. why kafka is fast:
     - https://blog.devgenius.io/what-makes-kafka-so-performant-df5dbecb7f3a
+
+9. How a query is executed ?
+    - https://medium.com/@hnasr/following-a-database-read-to-the-metal-a187541333c2#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkOWE1ZWY1YjEyNjIzYzkxNjcxYTcwOTNjYjMyMzMzM2NkMDdkMDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODQ5ODgyMjIsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwOTI2MzI0MDIwNzIzNTA4NDcwNSIsImVtYWlsIjoiNTExMDI2NDRtdDExNEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXpwIjoiMjE2Mjk2MDM1ODM0LWsxazZxZTA2MHMydHAyYTJqYW00bGpkY21zMDBzdHRnLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6InBoxrDGoW5nIMSRaW5oIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBY0hUdGQ3R2xTamRFRFhtOGM0UWNlOUJHOFR1TlBuRGo0elR2NjZaUmt0PXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6InBoxrDGoW5nIiwiZmFtaWx5X25hbWUiOiLEkWluaCIsImlhdCI6MTY4NDk4ODUyMiwiZXhwIjoxNjg0OTkyMTIyLCJqdGkiOiJmZTMxMTU4YWYzNWMxNTZhNTZlNDJlNmNiMmRiNDIwNTg1OTdkNWUzIn0.zclSXW-LHaRXJjBc7JKQlP-e2oc1S-qcsaDO8SIES9nzD1CvPUZMhyIHd237hkzYtH1wGvJDfDXmWWy5XHSCBmGSz7Jinbp9vUGu7TcjgEtNvUeOiZl-6AWzGGoU1wBRZNtR3BbTKHplwbKAs3RDQmJ8MUWO00cLV1NP7QCt3TvgHMEXLwk6qLiIbeBofbOpyWeXPLJX25E9OlgQt_75TuYjU8KXqlhKoCK3290WRURFO5vp37-MEI_CDv3fF-SDm0L-Wyik19LIfZ1FUJvEzPyP4MHqx9JITalbn_FCMfUeH7N7BnerXxPbEIGmaGnyMRAZWz8VZOjc8lzzublNmw
 
 ## SECURITY
 

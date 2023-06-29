@@ -1,0 +1,2 @@
+- s.split(): split string and remove all spaces
+- s.find(t) : return first index of s contains t
