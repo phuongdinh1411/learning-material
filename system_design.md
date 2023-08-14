@@ -130,3 +130,35 @@
 # Consistent Hashing
     - when hash table is re-sized: only k/n keys need to be remapped (k : all keys, n: n number of slots)
     - number of virtual node belongs to single physical nodes
+
+
+# caching
+    read intensive application
+        Cache-aside: miss cache -> db -> save cache
+        Cache-through: cache read DB to prefetch data -> return to app
+        Refresh-ahead
+    write intensive application
+        Write-Through: cache as main db
+        Write-behind: same as write -though but asynchonously write to db
+    Write-around: write to db -> cache    
+
+# connection
+https://blog.bytebytego.com/p/network-protocols-behind-server-push?utm_source=post-email-title&publication_id=817132&post_id=135305890&isFreemail=true&utm_medium=email
+
+
+# java garbage collection
+https://www.freecodecamp.org/news/garbage-collection-in-java-what-is-gc-and-how-it-works-in-the-jvm/
+
+# db transaction isolation
+- Symptoms:
+    - dirty read: read uncommited data from other txn
+    - non repeatable read: 2 read returns different value, data is commited by other txn
+    - phantom read: same as non-repeatable but happen for range of data
+    - write skew: contrainst : a + b =200- >both txn a and b read then txn write a, txn write b 
+- Isolation level:
+    - read uncommited
+    - read commited : either read or write lock
+    - repeatable Read : read locks on all rows it references and writes locks on all rows it inserts, updates, or deletes. 
+    - serializable: lock the whole table
+    - Snapshot Isolation: multi versions
+

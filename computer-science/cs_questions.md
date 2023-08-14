@@ -262,6 +262,14 @@
 - Good resources:
     * [Overview of OS syntax, try do dive deeper to each concept](https://medium.com/cracking-the-data-science-interview/the-10-operating-system-concepts-software-developers-need-to-remember-480d0734d710)
 
+8. Semaphore vs mutex:
+    Semaphore
+        It uses signals to do threads coordination or synchronization.
+        It allows multiple threads to access the same resource at the same time.
+        semaphore’s focus is to figure out threads’ dependencies and schedule them in the correct order.
+    Mutex
+        Only allows one thread to access the shared resource at one time
+        The focus is to handle resource access race conditions in multi-threading situations.
 
 ## DATABASE
 
