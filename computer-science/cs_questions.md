@@ -73,8 +73,6 @@
     - Ping works by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for a reply. When a ping command is issued, a ping signal is sent to a specified address. When the target host receives the echo request, it responds by sending an echo reply packet.
     - This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
 
-    - This approach serves two specific purposes: verifying that the target host is available and determining round-trip time (RTT) or latency.
-
 4. How HTTP works?
     - How does HTTP work? As a request-response protocol, HTTP gives users a way to interact with web resources such as HTML files by transmitting hypertext messages between clients and servers. HTTP clients generally use Transmission Control Protocol (TCP) connections to communicate with servers.
 
@@ -102,8 +100,11 @@
         + https://www.varlog.co.in/blog/hol-blocking-http/
         + https://medium.com/@ahmadfarag/http-in-depth-dfdac806c2c0
         + https://calendar.perfplanet.com/2020/head-of-line-blocking-in-quic-and-http-3-the-details/
+        + http 1.0 vs 1.1: make persistent connection default + pipelining: multi requestst in same connection. -> request and response must be in order -> haed of blocking -> pipelining is disabled by default
     - Learn about some useful headers.
     - HTTP2 improvement vs HTTP1:
+        + HTTP/2 introduced multiplexing with streams to solve HoL but not completely. Request/response are in stream with same stream-id:
+        + Frame -> Message -> Stream: each frame has stream-id
         + HTTP/2 is a major advancement in the HTTP protocol after HTTP/1.1 providing multiple features such as Binary Framing Layer, Multiplexing, Header Compression, Server Push, etc…
     - GRPC: https://ssudan16.medium.com/internals-of-grpc-architecture-afae7450ff5b
         + gRPC provides four communication patterns:
