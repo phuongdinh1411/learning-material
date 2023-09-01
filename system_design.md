@@ -162,3 +162,6 @@ https://www.freecodecamp.org/news/garbage-collection-in-java-what-is-gc-and-how-
     - serializable: lock the whole table
     - Snapshot Isolation: multi versions
 
+
+# sharding
+    https://medium.com/@jeeyoungk/how-sharding-works-b4dec46b3f6

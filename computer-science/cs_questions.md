@@ -124,7 +124,7 @@
     - When getting `*.js` or `image` files do why use another `TCP connection` or use the same one as in the get `HTML content`? How DNS lookup work in this case?
     - After your browser display "google.com" fully, is there any connection open?
     - Caching can apply to which steps? How caching applied?
-    - DNS: 
+    - DNS:
         + https://medium.com/tech-tajawal/journey-to-dns-part-1-96348198a2be
         + https://www.educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers/Y5ZqGDpDLrO
 
@@ -205,10 +205,15 @@
     - What is `deadlock` and how to avoid `deadlock`?
 
 3. How does memory is managed in the OS?
+
+
     - What is `virtual memory`? Why do we need it? How does it work?
+        + without memory management -> program and os use the same memorry -> user can write to os's memory. The need of reload rogram into memory to support context switching.
+        + static relocation -> complex -> dynamic relocation (base , bound register) -> waste resource if use large address space -> multi base-bound -> cause external gragmentation -> can compact but costly -> paging: pages (address space) + page frames (physical mem), mapping by hardware or os -> each process has page tables. Mapping is supported by MMU -> improve perfomance by cache (translation lookahead buffer) -> but it cost memory for page tables.
         + How large `virtual memory` is?
         + What is `mmap` ?
         + What is `paging`?
+            - split address space into pages (4kb each page), mapping to physical page frames.
         + Can 2 processes map to the same `physical address`? How and in which case?
             Usually, each process gets its own page table, so any address it uses is mapped to a unique frame in physical memory. But what if the operating system points two page table-entries to the same frame? This means that this frame will be shared; and any changes that one process makes will be visible to the other.
 
@@ -233,6 +238,15 @@
     - Where `global variable` will be saved?
     - what is memory management in linux ?
 
+3. IO:
+    - device also has its own api (status, command, data) and its own cpu.
+    - computer cpu call devices 's interface.
+    - pooling -> interupt  -> the need of new deices to be more optimized -> DMA , defer data transfering to DMA.
+   File management:
+    - abstraction layer for user , instead of working directly to disk.
+    - inode number for file identity -> inode table mapping inode number to metadata, pointer to data block.
+    - disk: split into block (same like virtual address), while the physical unit is sector.
+    - Bitmap to store which block will be used.
 4. Why in Linux `everything is "file"`?
     - How does mouse/keyboard/monitor..... communicate with your computer?
     - What is `file descriptor`?
