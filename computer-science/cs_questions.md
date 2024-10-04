@@ -129,6 +129,20 @@
         + https://www.educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers/Y5ZqGDpDLrO
 
 6. What is the connection pool? It's advantages and disadvantages? How to implement connection pool in your programing language?
+    https://www.javacodegeeks.com/2014/04/the-anatomy-of-connection-pooling.html
+    Advantages:
+        Performance. Use a fixed pool of connection and avoid the costly creation and release of connections.
+        Shared infrastructure. If your database is shared between several apps, you don't want one app to exhaust all connections. Pooling help to limit the number of connection per app.
+        Licensing. Depending on your database license, the number of concurrent client is limited. You can set a pool with the number of authorized connections. If no connection is available, client waits until one is available, or times out.
+        Connectivity issue. The connection pool that is between the client and the database, can provide handy features such as "ping" test, connection retry, etc. transparently for the client. In worse case, there is a time-out.
+        Monitoring. You can monitor the pool, see the number of active connections, etc.
+        
+        Advantages are it's much faster to open/close new connections as they're not really opened and closed, they're just checked out/in to a pool.
+
+        Disadvantage would be in some connection pools you'll get an error if all pooled connections are in use. This usually is a good thing as it indicates a problem with the calling code not closing connections, but if you legitimately need more connections than are in the pool and haven't configured it properly, you could get errors where you wouldn't otherwise.
+
+    Disadvantage:
+        You need to set it up and configure it, which is really peanuts usually.
 
 7. What is socket?
     - Why do we need socket? Why socket is a "file" in linux?
@@ -237,7 +251,7 @@
     - What is a pointer? What difference between `pass by value` and `pass by reference`?
     - Where `global variable` will be saved?
     - what is memory management in linux ?
-
+    - Lock: https://en.wikipedia.org/wiki/Lock_(computer_science)
 3. IO:
     - device also has its own api (status, command, data) and its own cpu.
     - computer cpu call devices 's interface.
